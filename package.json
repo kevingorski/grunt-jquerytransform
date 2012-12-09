@@ -1,0 +1,32 @@
+{
+  "name": "grunt-jquerytransform",
+  "description": "Grunt task for transforming HTML files with jQuery",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kevingorski/grunt-jquerytransform",
+  "author": {
+    "name": "Kevin Gorski",
+    "email": "kevin.gorski@gmail.com",
+    "url": "http://kevingorski.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kevingorski/grunt-jquerytransform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kevingorski/grunt-jquerytransform/issues"
+  },
+  "main": "grunt.js",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "jsdom": "0.2.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.3"
+  },
+  "keywords": [
+    "gruntplugin",
+    "jquery"
+  ]
+}
