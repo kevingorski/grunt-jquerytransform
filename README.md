@@ -8,6 +8,8 @@ grunt-jquerytransform is a grunt task for transforming HTML files with jQuery, b
 
 ## Use
 
+### Simple Case
+
 ```
 grunt.initConfig({
   jquerytransform: {
@@ -22,3 +24,7 @@ grunt.initConfig({
 grunt.loadNpmTasks('grunt-jquerytransform');
 
 ```
+
+### Async Transform
+
+If your transform depends on an asynchronous task you can call `this.async()` to get a callback to indicate the transform's completion.

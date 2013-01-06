@@ -55,11 +55,22 @@ module.exports = function(grunt) {
     processFile(f, function(err, window) {
       if(err) return cb(err);
 
-      var $ = window.$;
+      var $ = window.$,
+        async = false,
+        doneProcessing = function() {
+          cb(null, window.document.innerHTML, window);
+        },
+        context = {
+          async: function() {
+            async = true;
 
-      transform($);
+            return doneProcessing;
+          }
+        };
 
-      cb(null, window.document.innerHTML, window);
+      transform.call(context, $);
+
+      if(!async) doneProcessing();
     });
   });
 };
