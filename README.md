@@ -6,6 +6,9 @@ grunt-jquerytransform is a grunt task for transforming HTML files with jQuery, b
 
 	npm install grunt-jquerytransform
 
+### Grunt v0.3 Compatability
+Version 0.0.2 was the last version of grunt-jquerytransform that was compatible with grunt 0.3. 0.1.0 and higher are for grunt 0.4.
+
 ## Use
 
 ### Simple Case

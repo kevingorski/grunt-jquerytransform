@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     grunt.config.requires('jquerytransform');
 
     var conf = grunt.config('jquerytransform'),
-      files = file.expandFiles(conf.files),
+      files = file.expand({ filter: fs.isFile }, conf.files),
       transform = conf.transform,
       cb = this.async();
 
@@ -21,16 +21,14 @@ module.exports = function(grunt) {
 
       if(!f) return cb();
 
-      task.helper('jquerytransform:transform', f, transform, function(err, body) {
+      executeTransform(f, transform, function(err, body) {
         if(err) return grunt.fail.warn(err);
 
         // Write the new content, and keep the doctype safe (innerHTML returns
         // the whole document without doctype).
-        log.writeln(' • writing to output ' + f);
-        
         fs.writeFileSync(f, '<!doctype html>' + body);
 
-        log.writeln(String(' ✔ ').green + f);
+        log.ok(f);
 
         run(files);
       });
@@ -49,20 +47,20 @@ module.exports = function(grunt) {
     });
   }
 
-  grunt.registerHelper('jquerytransform:transform', function(f, transform, cb) {
+  function executeTransform(f, transform, cb) {
     log.subhead('About to transform ' + f);
 
     processFile(f, function(err, window) {
       if(err) return cb(err);
 
       var $ = window.$,
-        async = false,
+        isAsync = false,
         doneProcessing = function() {
           cb(null, window.document.innerHTML, window);
         },
         context = {
           async: function() {
-            async = true;
+            isAsync = true;
 
             return doneProcessing;
           }
@@ -70,7 +68,7 @@ module.exports = function(grunt) {
 
       transform.call(context, $);
 
-      if(!async) doneProcessing();
+      if(!isAsync) doneProcessing();
     });
-  });
+  };
 };
