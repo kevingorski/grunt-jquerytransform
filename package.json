@@ -25,6 +25,9 @@
   "devDependencies": {
     "grunt": "~0.4.0"
   },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
   "keywords": [
     "gruntplugin",
     "jquery"
